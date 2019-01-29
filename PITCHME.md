@@ -2,47 +2,60 @@
 
 ---
 
-## Add Some Slide Candy
+## Agenda
 
-![](assets/img/presentation.png)
+@ul[](false)
+* Application Performance Monitoring
+* Metrics
+* Dashboards
+@ulend
 
 ---
-@title[Customize Slide Layout]
+@title[Application Performance Monitoring]
 
-@snap[west span-50]
-## Customize Slide Content Layout
-@snapend
+## Application Performance Monitoring / APM
 
-@snap[east span-50]
-![](assets/img/presentation.png)
-@snapend
-
----?color=#E58537
-@title[Add A Little Imagination]
-
-@snap[north-west]
-#### Add a splash of @color[cyan](**color**) and you are ready to start presenting...
-@snapend
-
-@snap[west span-55]
-@ul[spaced text-white]
-- You will be amazed
-- What you can achieve
-- *With a little imagination...*
-- And **GitPitch Markdown**
+@ul
+* Monitor traffic and performance
+* Record traces
+* At the application level
 @ulend
-@snapend
 
-@snap[east span-45]
-@img[shadow](assets/img/conference.png)
-@snapend
+Note:
 
----?image=assets/img/presenter.jpg
+- Datadog understands a Rails application
+- The data is grouped logically along the lines of Rails
+- I'll go through the features and then do a demo
 
-@snap[north span-100 headline]
-## Now It's Your Turn
-@snapend
+---
+@title[Traffic and performance monitoring]
 
-@snap[south span-100 text-06]
-[Click here to jump straight into the interactive feature guides in the GitPitch Docs @fa[external-link]](https://gitpitch.com/docs/getting-started/tutorial/)
-@snapend
+![](assets/img/apm1.png)
+
+---
+@title[Traffic and performance monitoring]
+
+![](assets/img/apm2.png)
+
+---
+@title[Application traces]
+
+![](assets/img/trace1.png)
+
+---
+@title[Demo]
+
+## Demo
+
+---
+@title[Metrics]
+
+## Metrics
+---
+
+
+## Notes
+
+- Deep tracing with custom trace points
+
+- Custom metrics for specific endpoints (showing how to graph a single endpoints performance)
