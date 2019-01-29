@@ -1,4 +1,4 @@
-# Let's Get Started
+# Introduction to datadog
 
 ---
 
