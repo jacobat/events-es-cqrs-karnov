@@ -1,8 +1,4 @@
-@snap[north]
 ![](assets/img/dd_v_w_logo.png)
-@snapend
-
-# Introduction to datadog
 
 ---
 
