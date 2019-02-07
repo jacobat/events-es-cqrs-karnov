@@ -1,6 +1,6 @@
 # Introduction to datadog
 
-![](assets/img/DDlogo.jpg)
+![](assets/img/dd_v_w_logo.png)
 
 ---
 
