@@ -1,5 +1,7 @@
 # Introduction to datadog
 
+![](assets/img/DDlogo.jpg)
+
 ---
 
 ## Agenda
@@ -51,6 +53,10 @@ Note:
 @title[Metrics]
 
 ## Metrics
+
+* Built in
+* Custom metrics
+
 ---
 
 
