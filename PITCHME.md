@@ -1,4 +1,4 @@
-@snap[west]
+@snap[west sidebar]
 ![](assets/img/dd_v_w_logo.png)
 @snapend
 
