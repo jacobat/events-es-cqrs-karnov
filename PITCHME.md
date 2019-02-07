@@ -1,5 +1,10 @@
 ![](assets/img/dd_v_w_logo.png)
 
+Note:
+
+- Datadog is a monitoring tool that collects various metrics
+- The focus today is on application level metrics
+
 ---
 
 ## Agenda
