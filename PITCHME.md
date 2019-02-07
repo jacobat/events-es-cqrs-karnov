@@ -157,12 +157,9 @@ Note:
 
 ## Thanks
 
----
+Note:
 
-> ## Notes
->
-> - Deep tracing with custom trace points
->
-> - Custom metrics for specific endpoints (showing how to graph a single endpoints performance)
-> - Installation
-> - Formula for graphing
+- Deep tracing with custom trace points
+- Custom metrics for specific endpoints (showing how to graph a single endpoints performance)
+- Installation
+- Formula for graphing
