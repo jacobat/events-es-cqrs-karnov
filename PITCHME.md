@@ -154,10 +154,15 @@ Note:
 ![](assets/img/install-initializer.png)
 
 ---
-## Notes
 
-- Deep tracing with custom trace points
+## Thanks
 
-- Custom metrics for specific endpoints (showing how to graph a single endpoints performance)
-- Installation
-- Formula for graphing
+---
+
+> ## Notes
+>
+> - Deep tracing with custom trace points
+>
+> - Custom metrics for specific endpoints (showing how to graph a single endpoints performance)
+> - Installation
+> - Formula for graphing
