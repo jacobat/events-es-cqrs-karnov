@@ -117,16 +117,17 @@ Note:
 
 - This is the code necessary to gather the data
 
---
+---
 @title[Dashboards]
 
 ## Dashboards
 
 Note:
+
 - Dashboards can hold any of the time series data we've seen so far
 - You can apply functions to the data for more advanced presentations
 
---
+---
 @title[Dashboards]
 
 ![](assets/img/account-service-dashboard.png)
@@ -137,22 +138,22 @@ Note:
 - It's gathering the most important metrics for account service
 - Function application example: Logins failed = attempted - succeeded
 
---
+---
 @title[Dashboards]
 
 ## Demo
 
---
+---
 @title[Installation]
 
 ![](assets/img/install-gemfile.png)
 
---
+---
 @title[Installation]
 
 ![](assets/img/install-initializer.png)
 
---
+---
 ## Notes
 
 - Deep tracing with custom trace points
