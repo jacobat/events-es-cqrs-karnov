@@ -2,7 +2,9 @@
 ![](assets/img/dd_v_w_logo.png)
 @snapend
 
+@snap[east]
 # Introduction to datadog
+@snapend
 
 ---
 
