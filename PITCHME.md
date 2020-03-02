@@ -1,165 +1,244 @@
-![](assets/img/dd_v_w_logo.png)
+## Events, Event Sourcing, and CQRS
 
 Note:
 
-- Datadog is a monitoring tool that collects various metrics
-- The focus today is on application level metrics
+- High level introduction
+- I hope you will come away with some inspiration that there are other ways of
+  doing things
+
+---?color=white&image=assets/img/big_bank.1.jpg&size=contain
+
+Note:
+
+- Imagine a bank. You go and make a deposit. The teller whips out their
+  calculator and adds your deposit and the current balance. He then takes out
+  an eraser, erases the current balance and writes the new balance.
+
+---?color=white
+
+![](assets/img/es-intro1.1.png)
+
+Note:
+
+- It could look like this
+- This is not how banks work.
+
+---?color=white
+
+![](assets/img/events2.1.png)
+
+Note:
+
+- We can derive the current balance
+
+---?color=white
+
+![](assets/img/events4.1.png)
+
+Note:
+
+- We can see the states as every event is applied
 
 ---
-
-## Agenda
+## State of system design
 
 @ul[](false)
-* Application Performance Monitoring
-* Metrics
-* Dashboards
+* Store the current state in the database
+* REST / GraphQL
+* Maybe a message queue
 @ulend
 
 Note:
 
-- We'll focus on these three Datadog features today
-- This will be at a rather high level to give a sense of what is possible
+- This is how we've been building systems for the past many years
+- If you want to update data you go and overwrite what's in the database
+- You put an API in front of it
+- If you're fancy you might put a message queue in to temporally decouple systems
 
 ---
-@title[Application Performance Monitoring]
+## Issues with the current approach
 
-## Application Performance Monitoring / APM
 
 @ul[](false)
-* How fast is my application?
-* How fast is this endpoint?
-* Why is it not fast?
+* Performance / scalability, especially for micro services
+* History is lost
+* Leads to highly coupled systems
 @ulend
 
 Note:
 
-- Performance is an important part of the user experience
-- A slow application is not a good experience
-- Datadog can help giving answers to questions like this
-- So how does Datadog provide these answers?
+- When designing systems the way we do today it leads us towards the
+  distributed monolith (aka. death star architecture)
+  - Services become dumb data holders
+- Whenever an update or delete statement runs history is lost
+- Run on effects: Debugging
+- Because we don't have an easy way to distribute state it's easier to just add
+  the next feature to the existing codebase
 
 ---
-@title[Application Performance Monitoring]
-
-## Application Performance Monitoring / APM
+## Events
 
 @ul[](false)
-* Monitor traffic and performance
-* Record traces
-* At the application level
+* A historical fact
+* Related to an entity
 @ulend
 
 Note:
 
-- Datadog understands a Rails application
-- The data is grouped logically along the lines of Rails
-- I'll go through the features and then do a demo
+- Let's change pace a bit and talk about events
+- It happened in the past, so we name it in the past tense
+- It's a fact
+- So it can't change
+- Typically related to a single entity, for instance a bank account
 
 ---
-@title[Traffic and performance monitoring]
+## Example events
 
-![](assets/img/apm1.png)
-
----
-@title[Traffic and performance monitoring]
-
-![](assets/img/apm2.png)
-
----
-@title[Application traces]
-
-![](assets/img/trace1.png)
+@ul[](false)
+* User signed up
+* Document published
+* Paragraph annotated
+@ulend
 
 Note:
 
-- Shows Datadogs default tracing capabilities
-- Shows custom tracing
+- A couple of examples, all named in the past tense
+- Not up for discussion
 
 ---
-@title[Demo]
+## An event log
 
-## Demo
-
----
-@title[Metrics]
-
-## Metrics
-
-* Built in
-* Custom metrics
-
----
-@title[Metrics]
-
-![](assets/img/default-metrics.png)
+@ul[](false)
+* A log of events
+* Every event that ever happened
+@ulend
 
 Note:
 
-- The metrics explorer allows us to discover and view metrics
-- We can group data points by various dimensions
+- Taking the ideas of events a little further
+- If we have access to the log we no longer need to ask anyone to figure out
+  what the state is
 
 ---
-@title[Metrics]
+## Event Sourcing
 
-![](assets/img/custom-metrics.png)
+@ul[](false)
+* Using the event log as the source of truth
+* Everything else is derived from the event log
+@ulend
+
+Note:
+- We can only have 1 source of truth so we no longer use the database tables as
+  the source of truth
+
+---
+## Commands
+
+@ul[](false)
+* The origin if events
+* Imperative
+* Causes one or more events
+* Can be issued by users or systems
+* Can be rejected
+@ulend
+
+Note:
+- A command is a request from a user or another system to get our system to do
+  something
+- As opposed to events we can choose to reject or accept the command depending
+  on the business rules
+- Example: Publish document (can be rejected for invalid documents)
+
+---
+## Benefits
+
+@ul[](false)
+* Higher level language
+* Answer historical questions
+* Derive new information
+* Easier debugging
+@ulend
+
+Note:
+- We get a language where we can talk about our systems in business terms.
+- The domain is reflected closely in code.
+- We can answer questions like "what did this look like 3 days ago", "who did this", etc.
+- We can extract new information from the events if we're lucky
+- It becomes easier to answer the question "How did we end up here?"
+
+---
+## CQRS
+
+@ul[](false)
+* Command/query responsibility segregation
+* Split read and write
+* A common solution to querying when using Event Sourcing
+* Build event projections for reading
+@ulend
 
 Note:
 
-- Custom metrics allow us to collect different kinds of time series data
-- We're using counts
+- Splitting the code that does writes from the code that does reads
+- Not dependent on event sourcing, but fits very well with it
+- Event projections can be highly performant as they can be tailored to fix the
+  exact usecase
 
----
-@title[Metrics]
+---?color=white
 
-![](assets/img/custom-metrics-code.png)
-
-Note:
-
-- This is the code necessary to gather the data
-
----
-@title[Dashboards]
-
-## Dashboards
+![](assets/img/cqrs1.png)
 
 Note:
 
-- Dashboards can hold any of the time series data we've seen so far
-- You can apply functions to the data for more advanced presentations
+---?color=white
 
+![](assets/img/cqrs2.png)
+
+Note:
 ---
-@title[Dashboards]
+## Using events for system design
 
-![](assets/img/account-service-dashboard.png)
+@ul[](false)
+* Design becomes natural
+* Reactive systems instead of active systems
+@ulend
 
 Note:
 
-- This is the account service dashboard
-- It's gathering the most important metrics for account service
-- Function application example: Logins failed = attempted - succeeded
+- The design of the system becomes more natural when we can talk about things
+  that happens
+- Instead of querying other systems we can now invert the dependencies
+- Publish events over querying API continuously
+- Efficiency
 
 ---
-@title[Dashboards]
+## Using events between systems
 
-## Demo
+@ul[](false)
+* Use integration events
+* Decoupled systems
+* Easy to add new capabilities
+@ulend
+
+Note:
+
+- Allows is to build reactive systems
+- We don't have to continuously poll expensive endpoints
+
 
 ---
-@title[Installation]
+## Examples today
 
-![](assets/img/install-gemfile.png)
+@ul[](false)
+* Updating user access to Talent LMS
+* AccountService OnlineUser
+@ulend
+
+---?color=white
+
+![](assets/img/events5.png)
 
 ---
-@title[Installation]
-
-![](assets/img/install-initializer.png)
+## Questions
 
 ---
-
 ## Thanks
-
-Note:
-
-- Deep tracing with custom trace points
-- Custom metrics for specific endpoints (showing how to graph a single endpoints performance)
-- Installation
-- Formula for graphing

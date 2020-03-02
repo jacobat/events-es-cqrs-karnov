@@ -30,7 +30,7 @@ layout : center
 # Footnote Setting
 # Doc: https://gitpitch.com/docs/settings/footnote
 #
-footnote : "Datadog introduction"
+footnote : "Events, Event Sourcing, and CQRS"
 background-color : "#fed551"
 
 #
